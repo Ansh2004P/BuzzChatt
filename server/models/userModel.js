@@ -12,12 +12,20 @@ const userSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+//@desription    comparing the password with password in the database
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  // compare method will do the work of comparing the user password with database password + salt autometically
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// @description    encrypting the password before saving the user
 userSchema.pre("save", async function (next) {
   if (!this.isModified) {
     next();
   }
 
   const salt = await bcrypt.genSalt(12);
+  console.log(salt);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
