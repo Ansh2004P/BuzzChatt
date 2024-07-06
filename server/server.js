@@ -4,6 +4,7 @@ import connectDB from "./config/connect.js";
 import colors from "colors";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/v1/user", userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () =>
   console.log(`Server started at :  http://localhost:${PORT}`.yellow.bold)
