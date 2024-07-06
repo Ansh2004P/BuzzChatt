@@ -5,7 +5,7 @@ const ChatPage = () => {
   const [chats, setChats] = useState([]);
 
   const fetchChat = async () => {
-    const { data } = await axios.get("/api/chat");
+    const { data } = await axios.get("/v1/chat");
     // console.log(data);
     setChats(data);
   };
