@@ -4,7 +4,7 @@ import generateToken from "../config/generateToken.js";
 
 // @description   register a new user and check if user already exists
 export const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, profilePic } = req.body;
+  const { name, email, password, pic } = req.body;
 
   if (!name || !email || !password) {
     res.status(400);
@@ -22,7 +22,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    profilePic,
+    pic,
   });
 
   if (user) {
@@ -30,7 +30,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      profilePic: user?.profilePic,
+      pic: user?.pic,
       token: generateToken(user._id),
     });
   } else {
@@ -57,4 +57,19 @@ export const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalid email or paasword");
   }
+});
+
+// /v1/user
+export const allUsers = asyncHandler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
 });

@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profilePic: { type: String, default: defaultPic },
+    pic: { type: String, default: defaultPic },
   },
   { timestamps: true }
 );
@@ -25,7 +25,7 @@ userSchema.pre("save", async function (next) {
   }
 
   const salt = await bcrypt.genSalt(12);
-  console.log(salt);
+  // console.log(salt);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
