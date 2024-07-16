@@ -1,0 +1,48 @@
+# BuzzChat
+
+BuzzChat is a real-time chat application designed to facilitate seamless and instant communication. Built using React, Node.js, and WebSocket, BuzzChat aims to provide a smooth and efficient messaging experience.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Features
+
+- **Real-time Messaging**: Instantaneous message delivery using WebSocket.
+- **User Authentication**: Secure user login and registration.
+- **Private Chats**: One-on-one messaging between users.
+- **Group Chats**: Create and join multiple chat groups.
+- **Message History**: Persist chat history for future reference.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Emojis and Media**: Support for emojis, images, and file sharing.
+
+## Technologies
+
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Real-time Communication**: WebSocket
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+- **Deployment**: Docker, Kubernetes
+
+## Installation
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Docker (optional, for containerization)
+
+### Steps
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/yourusername/buzzchat.git
+   cd buzzchat

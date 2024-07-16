@@ -9,6 +9,7 @@ import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
+import { log } from "console";
 
 const app = express();
 app.use(express.json());
@@ -16,40 +17,35 @@ app.use(express.json());
 connectDB();
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 //--------------------------Routes--------------------------
-
-app.get("/", (req, res) => {
-  console.log("Server started");
-  res.send("Server started");
-});
 
 app.use("/v1/user", userRoutes);
 app.use("/v1/chats", chatRoutes);
 app.use("/v1/message", messageRoutes);
 
-//
-
-app.use(notFound);
-app.use(errorHandler);
-
 //--------------------------Production--------------------------------
 
-const __dirname = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
+const __dirname1 = path.resolve();
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-  });
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "client", "build", "index.html"))
+  );
 } else {
   app.get("/", (req, res) => {
-    res.send("API is running....");
+    res.send("API is running..");
   });
 }
 
 //-------------------SOCKET.IO Configuration--------------------------
+
+app.use(notFound);
+app.use(errorHandler);
+
 const server = app.listen(PORT, () =>
   console.log(`Server started at :  http://localhost:${PORT}`.yellow.bold)
 );
