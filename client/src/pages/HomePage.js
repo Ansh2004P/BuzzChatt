@@ -16,20 +16,29 @@ const HomePage = () => {
   return (
     <Container maxW="xl" centerContent>
       <Box
+        textColor={"black"}
         d="flex"
         justifyContent="center"
         p={3}
         bg="white"
+        opacity={0.9}
         w="100%"
-        m="40px 0 15px 0"
-        borderRadius="lg"
-        borderWidth="1px"
+        m="50px 0 0px 0"
+        borderTopLeftRadius={"25px"}
+        borderTopRightRadius={"25px"}
       >
         <Text fontSize="4xl" fontFamily="Work sans">
           BuzzChat
         </Text>
       </Box>
-      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+      <Box
+        bg="white"
+        opacity={0.9}
+        w="100%"
+        p={4}
+        borderBottomRightRadius={"25px"}
+        borderBottomLeftRadius={"25px"}
+      >
         <Tabs isFitted variant="soft-rounded">
           <TabList mb="1em">
             <Tab>Login</Tab>
